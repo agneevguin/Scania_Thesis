@@ -1,5 +1,6 @@
 # Scania_Thesis
-Code for Semantic Segmentation
+
+## Code for Semantic Segmentation
 
 ### Analysis
 * Contribution to the understanding of the inference and evaluate the results
@@ -19,7 +20,7 @@ Code for Semantic Segmentation
 * Old tests used for analysis
 
 
-## STEPS TO REMEMBER
+## Steps To Remember
 
 ### Drivenet Example
 ```
@@ -48,7 +49,7 @@ sudo ifconfig eth0 down
 sudo ifconfig eth0 up
 ```
 
-###  FEATURE EXTRACTION
+###  Feature Extraction
 ```
 ./sample_camera_tracker --video=/home/scania/Scania/Glantan_Recordings/2017-03-24_DrivePX2/dw_20170324_115428_0.000000_0.000000/video_front.h264
 cd /Scania/Opencv/samples/python
@@ -73,7 +74,7 @@ https://gist.github.com/weiliu89/45e9e8de2c13af6476ca#file-readme-md
 train --solver=/home/scania/Scania/Deep_Learning/digits/digits/jobs/20170406-093958-021f/solver.prototxt --gpu=0 --weights=/home/scania/Scania/Deep_Learning/digits/examples/semantic-segmentation/VGG_ILSVRC_16_layers_fc_reduced.caffemodel"
 ```
 
-### CONVERT Images and Video
+### Get Images From Video
 ```
 ffmpeg -i scania_0001.raw qscale:v 2 output_%04.jpg
 avconv -i video_front.h264 20170324_113202_%04d.jpg
@@ -81,7 +82,7 @@ avconv -i video_front.raw -vcodec copy -acodec copy output_front.h264  //FAILED
 ffmpeg -r 5 -start_number 1001 -i 20170324_115428_%04d.png -c:v libx264 -vf fps=25 -pix_fmt yuv420p out.mp4				# Images to video
 ```
 
-### RESIZE IMAGE
+### Resize Image
 ```
 sudo apt-get install imagemagick
 convert  -resize 50% source.png dest.jpg
@@ -99,8 +100,7 @@ convert *.jpg -flop -set filename:new "%t_R" "%[filename:new].jpg"   	# Rotate i
 ```
 
 
-###
-PRESENTATION 4 APRIL
+### Presentation 4 April
 ```
 cd /usr/local/driveworks-0.2.1/tools
 
@@ -135,7 +135,7 @@ http://pandas-ml.readthedocs.io/en/stable/conf_mat.html
 http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py
 
 
-### OVERNIGHT TEST
+### Overnight Test
 ```
 Remove +30 options
 python inference_agneev.py /home/scania/Scania/Glantan_Recordings/2017-04-07_DrivePX2/20170405_124731/video_front.h264 /home/scania/Scania/Deep_Learning/DataSets/Test_Data/scania_sample/Inference 20170419-213931-6881
@@ -143,20 +143,21 @@ python inference_agneev.py /home/scania/Scania/Agneev/Labels/Images_List.txt /ho
 /home/scania/Scania/Glantan_Recordings/2017-04-07_DrivePX2/dw_20170405_123343_0.000000_0.000000/video_front.h264
 ```
 
-### JOB NUMBERS
-```
-CLASSES 					DATASET									MODELS
-7 classes: 					20170419-152029-5e0d					20170419-153352-2f2f
-16 classes: 				20170419-213812-86a7					20170419-213931-6881
-9 classes:					20170426-114517-ceba					20170426-114600-520a
-10 classes: 				20170426-144243-3e52					20170426-144433-798d
-5 classes: 					20170426-150630-756f					20170426-150713-36b9
+### Job Numbers
 
-16 classes_682				20170503-010848-a41c					20170503-011008-dc7d
-9 classes_682				20170503-044312-aa42					20170503-045532-da28
-
-16 classes_1364
-9 classes_1364				20170515-155318-1a09
+CLASSES 					|DATASET								|MODELS
+ --- | --- | --- |
+7 classes: 					|20170419-152029-5e0d					|20170419-153352-2f2f
+16 classes: 				|20170419-213812-86a7					|20170419-213931-6881
+9 classes:					|20170426-114517-ceba					|20170426-114600-520a
+10 classes: 				|20170426-144243-3e52					|20170426-144433-798d
+5 classes: 					|20170426-150630-756f					|20170426-150713-36b9
+							|										|
+16 classes_682				|20170503-010848-a41c					|20170503-011008-dc7d
+9 classes_682				|20170503-044312-aa42					|20170503-045532-da28
+							|										|
+16 classes_1364				|										|
+9 classes_1364				|20170515-155318-1a09					|
 ```
 
 ### Digits Inference
