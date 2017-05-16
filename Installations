@@ -1,0 +1,101 @@
+###
+BASIC INSTALLATIONS
+sudo apt-get install minicom
+sudo apt-get install p7zip-full dpkg-dev lib32z1 tftp lib32ncurses5 lib32bz2-1.0 lib32stdc++6 isc-dhcp-server nfs-kernel-server minicom resolvconf gcc-multilib
+ls -aiF | grep libEGL
+sudo apt-get install terminator
+sudo apt-get install chromium-browser
+sudo apt-get install git
+sudo apt-get install yum
+sudo apt-get install cmake
+sudo apt-get install libx11-dev
+sudo apt-get install xorg-dev
+sudo apt-get install libssl1.0.0
+sudo apt-get install libssl-dev:i386
+sudo apt-get install libxcursor1:i386 libxcursor1-dbg:i386
+sudo apt-get install libav-tools #ffmpeg
+
+
+###
+DRIVEWORKS STEPS
+scp nvidia@192.168.13.120:/usr/local/driveworks-0.2.1/samples/3rdparty/linux-aarch64/vibrante/lib/libXcursor.so \
+$V4L_PDK_PATH/vibrante-t186ref-linux/lib-target/
+
+cmake -DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_TOOLCHAIN_FILE=/usr/local/driveworks-0.2.1/samples/cmake/Toolchain-V4L.cmake \
+-DVIBRANTE_PDK:STRING=/home/scania/Scania/Drive_PX2_Beta_1/VibrantePDK/vibrante-t186ref-linux \
+/usr/local/driveworks-0.2.1/samples/
+
+scp -r /usr/local/bin/* \
+nvidia@192.168.13.120:/home/nvidia/Scania/Bin_Built
+
+
+###
+FOR TENSORFLOW
+sudo apt-get install python-pip
+sudo pip install numpy scipy pillow matplotlib commentjson
+ERROR:http://stackoverflow.com/questions/17886647/cant-install-via-pip-because-of-egg-info-error
+sudo python ez_setup.py
+sudo easy_install pip
+sudo pip install django
+sudo apt-get install python-dev
+sudo apt-get install gfortran libopenblas-dev liblapack-dev python-dev
+sudo apt-get install python-numpy python-scipy
+sudo apt-get install python-matplotlib
+sudo apt-get install openbabel
+sudo apt-get install libpng-dev libjpeg8-dev libfreetype6-dev pkg-config
+
+
+###
+For FCN Tensorflow
+Change in FCN.py
+        deconv_shape3 = tf.pack([shape[0], shape[1], shape[2], NUM_OF_CLASSESS])
+        deconv_shape3 = tf.stack([shape[0], shape[1], shape[2], NUM_OF_CLASSESS])
+    loss = tf.reduce_mean((tf.nn.sparse_softmax_cross_entropy_with_logits(logits, tf.squeeze(annotation, squeeze_dims=[3]), name="entropy")))
+    loss = tf.reduce_mean((tf.nn.sparse_softmax_cross_entropy_with_logits(labels=tf.squeeze(annotation, squeeze_dims=[3]), logits=logits, name="entropy")))
+
+###
+For OPENCV
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+http://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html
+
+###
+For Scikit image
+http://scikit-image.org/docs/dev/install.html
+
+###
+For Caffe net
+sudo apt-get install libatlas-base-dev
+http://caffe.berkeleyvision.org/installation.html
+sudo apt-get install python-xlib && sudo pip install pygtk
+git clone git@github.com:livoras/easydict.git
+cd easydict
+sudo python setup.py install
+
+
+### 
+For DIGITS
+DIGITS_ROOT=/home/scania/Scania/Deep_Learning/digits
+git clone https://github.com/NVIDIA/DIGITS.git $DIGITS_ROOT
+sudo pip install --upgrade pip setuptools (http://stackoverflow.com/questions/35991403/python-pip-install-gives-command-python-setup-py-egg-info-failed-with-error-c)
+
+
+###
+For CAFFE2
+sudo apt-get install libprotobuf-dev protobuf-compiler libatlas-base-dev libgoogle-glog-dev libgtest-dev liblmdb-dev libleveldb-dev libsnappy-dev python-dev python-pip libiomp-dev libopencv-dev libpthread-stubs0-dev cmake python-protobuf git
+sudo pip install numpy matplotlib ipython
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+wget http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/libcudnn5_5.1.10-1+cuda8.0_amd64.deb
+wget http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/libcudnn5-dev_5.1.10-1+cuda8.0_amd64.deb
+sudo dpkg -i libcudnn5*
+https://caffe2.ai/docs/getting-started.html?platform=ubuntu&configuration=compile
+
+###
+For Confusion Matrix
+https://github.com/pandas-ml/pandas-ml
+http://pandas-ml.readthedocs.io/en/stable/conf_mat.html
+http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py
+sudo pip install seaborn
