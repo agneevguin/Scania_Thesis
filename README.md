@@ -77,6 +77,7 @@ train --solver=/home/scania/Scania/Deep_Learning/digits/digits/jobs/20170406-093
 ### Get Images From Video
 ```
 ffmpeg -i scania_0001.raw qscale:v 2 output_%04.jpg
+ffmpeg -i video_front.h264 -r 25 20170324_115428_%04d.bmp 																# Best to use
 avconv -i video_front.h264 20170324_113202_%04d.jpg
 avconv -i video_front.raw -vcodec copy -acodec copy output_front.h264  //FAILED
 ffmpeg -r 5 -start_number 1001 -i 20170324_115428_%04d.png -c:v libx264 -vf fps=25 -pix_fmt yuv420p out.mp4				# Images to video
@@ -191,4 +192,17 @@ python test_segnet.py --model=/home/scania/Scania/Agneev/DNN_Data/Agneev_16/depl
 ~/Scania/Agneev/Results/Half_Time_Presentation_Videos
 python test_segnet.py --model=Agneev_16/deploy.prototxt --weights=Agneev_16/snapshot_iter_16380.caffemodel --colours=Agneev_16/lut_16.png --data=Video_Set_4/Images_List.txt
 python test_segnet.py --model=Agneev_16/deploy.prototxt --weights=Agneev_16/snapshot_iter_16380.caffemodel --colours=Agneev_16/lut_16.png --data=Video_Set_4/Images_List_with_mask.txt
+```
+
+### To obtain New Color Labels
+Place files in /home/scania/Scania/Agneev/Labels/Color_Labels/
+```
+cd /home/scania/Scania/Agneev/Code/Augmentation
+python flip_image.py
+
+cd /home/scania/Scania/Agneev/Code/Calibration
+python save_undistorted.py
+
+cd /home/scania/Scania/Agneev/Code/Augmentation
+random_cropping_rotation.py
 ```
