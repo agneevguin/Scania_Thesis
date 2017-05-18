@@ -1,7 +1,15 @@
+#!/usr/bin/env python
+__author__ = "Agneev Guin"
+__credits__ = ["Mikael Salmen", "Marco Trincavelli", "Christian Smith"]
+__version__ = "0.1"
+__email__ = "agneev@kth.se"
+
 import sys, random, os
 import shutil
 '''
-Usage: python shuffle_split_files.py files.txt train val test 0.1
+Usage: 
+python shuffle_split_files.py # for 10% split
+python shuffle_split_files.py 0.2 # for 20% split
 '''
 data = '/home/scania/Scania/Agneev/DNN_Split_Data/All_Data/'
 output = '/home/scania/Scania/Agneev/DNN_Split_Data/Output/'
@@ -10,10 +18,11 @@ labels = 'Labels/'
 dir1 = output + 'Train/'
 dir2 = output + 'Val/'
 dir3 = output + 'Test/'
-ratio = 0.2
+ratio = 0.1
 
 if __name__ == '__main__':
-
+    if len(sys.argv) == 2:
+        ratio = float(sys.argv[1])
     image_files = []
     label_files = []
     for file in os.listdir(data+images):

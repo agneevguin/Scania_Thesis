@@ -206,3 +206,9 @@ python save_undistorted.py
 cd /home/scania/Scania/Agneev/Code/Augmentation
 random_cropping_rotation.py
 ```
+
+### To split data to training, validation and test sets
+```
+cd /home/scania/Scania/Agneev/Code/Split_Data
+python shuffle_split_files.py
+```
