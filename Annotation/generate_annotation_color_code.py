@@ -14,7 +14,7 @@ import os
 from pathlib2 import Path
 XML_PATH = '/home/scania/Scania/Agneev/Labels/XMLs/'
 SAVE_COLOR_LABEL_PATH = '/home/scania/Scania/Agneev/Labels/Color_Labels/'
-AUGMENTED_IMAGES_PATH = '/home/scania/Scania/Agneev/Labels/Saved_Labels/Images_Augmented_682/'
+AUGMENTED_IMAGES_PATH = '/home/scania/Scania/Agneev/Labels/Saved_Labels/Images_BMP_Set/Images_Augmented_682/'
 INCORRECT_FILES = ['output_0008.xml', '20170324_112630_0046.xml']
 
 # Color for each class
@@ -59,7 +59,7 @@ for filename in os.listdir(XML_PATH):
 
 			class_val = objectlist[object_count].childNodes[0].firstChild.nodeValue
 
-			'''
+			
 			### FINAL PREFERRED COLORS
 			if class_val == 'asphalt':
 				draw.polygon(points, fill=ASPHALT)
@@ -97,7 +97,7 @@ for filename in os.listdir(XML_PATH):
 				draw.polygon(points, fill=BACKGROUND)
 			### UNTIL HERE
 			
-			
+			'''
 			# 7 classes 1ST TRY
 			if class_val == 'asphalt':
 				draw.polygon(points, fill=GRASS)
@@ -113,7 +113,7 @@ for filename in os.listdir(XML_PATH):
 				draw.polygon(points, fill='rgb(127,0,0)')
 			else:
 				draw.polygon(points, fill=BACKGROUND)
-			'''
+			
 			# 9 classes : Drivable
 			if class_val == 'asphalt':
 				draw.polygon(points, fill=ASPHALT)
@@ -133,7 +133,7 @@ for filename in os.listdir(XML_PATH):
 				draw.polygon(points, fill=SNOW)
 			else:
 				draw.polygon(points, fill=BACKGROUND)
-			'''
+			
 			# Combined: All gravel; mud + water; 10 class
 			if class_val == 'asphalt':
 				draw.polygon(points, fill=ASPHALT)
@@ -182,19 +182,19 @@ for filename in os.listdir(XML_PATH):
 		# Check for augmented files with corresponding names. Mostly +-2 or +-4
 		# zfill(4) to convert int(15) to str(0015)
 		if filename not in ['output_0634']:
-			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])+2).zfill(4) +'.jpg')
+			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])+2).zfill(4) +'.bmp')
 			if test_file.exists():
 				im.save(SAVE_COLOR_LABEL_PATH+filename[:-4]+str(int(filename[-4:])+2).zfill(4)+'.png')
 				#print test_file + 'Then'
-			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])-2).zfill(4)+'.jpg')
+			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])-2).zfill(4)+'.bmp')
 			if test_file.exists():
 				im.save(SAVE_COLOR_LABEL_PATH+filename[:-4]+str(int(filename[-4:])-2).zfill(4)+'.png')
 
-			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])+4).zfill(4)+'.jpg')
+			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])+4).zfill(4)+'.bmp')
 			if test_file.exists():
 				im.save(SAVE_COLOR_LABEL_PATH+filename[:-4]+str(int(filename[-4:])+4).zfill(4)+'.png')
 
-			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])-4).zfill(4)+'.jpg')
+			test_file = Path(AUGMENTED_IMAGES_PATH+filename[:-4]+str(int(filename[-4:])-4).zfill(4)+'.bmp')
 			if test_file.exists():
 				im.save(SAVE_COLOR_LABEL_PATH+filename[:-4]+str(int(filename[-4:])-4).zfill(4)+'.png')
 		'''

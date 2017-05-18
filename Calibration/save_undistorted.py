@@ -36,12 +36,12 @@ D = np.array([-0.27918479,  0.06520399 , 0.00043639 , 0.0031953 , -0.00600766])
 # Knew[(0,1), (0,1)] = 0.4 * Knew[(0,1), (0,1)]
 
 w, h = 1080, 1280
-path = '/home/scania/Scania/Agneev/Labels/Saved_Labels/Images_BMP_Set/Images_Augmented_1364/'
+path = '/home/scania/Scania/Agneev/Labels/Color_Labels/'
 #path = '/home/scania/Scania/Agneev/Code/Calibration/calibration_images/'
 head , tail = os.path.split(path)
 
 for filename in os.listdir(path):
-	if not filename.endswith('.bmp'): continue
+	if not filename.endswith('.png'): continue
 	print filename
 	img = cv2.imread(path+filename)
 	# img_undistorted = cv2.undistort(img, K, D=D, Knew=Knew)
