@@ -11,7 +11,8 @@ Usage:
 python shuffle_split_files.py # for 10% split
 python shuffle_split_files.py 0.2 # for 20% split
 '''
-data = '/home/scania/Scania/Agneev/DNN_Split_Data/All_Data/'
+data_images = '/home/scania/Scania/Agneev/DNN_Split_Data/All_Data/Images/'
+data_labels = '/home/scania/Scania/Agneev/DNN_Split_Data/All_Data/Labels/'
 output = '/home/scania/Scania/Agneev/DNN_Split_Data/Output/'
 images = 'Images/'
 labels = 'Labels/'
@@ -21,13 +22,16 @@ dir3 = output + 'Test/'
 ratio = 0.1
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
+    if len(sys.argv) >= 2:
         ratio = float(sys.argv[1])
+    if len(sys.argv) == 4:
+        data_images = str(sys.argv[2]+'/')
+        data_labels = str(sys.argv[3]+'/')
     image_files = []
     label_files = []
-    for file in os.listdir(data+images):
+    for file in os.listdir(data_images):
         if not (file.endswith('.bmp')): continue        # change to bmp
-        image_files.append(data+images+file)
+        image_files.append(data_images+file)
 
     shuffled = image_files[:]
     random.shuffle(shuffled)
@@ -47,17 +51,18 @@ if __name__ == '__main__':
             os.mkdir(d+labels)
         
     for file in to_dir1:
+        print file
         file = os.path.split(file)[1].split('.')[0]
         print 'Train:', file
-        shutil.copy(data+images+file+'.bmp', dir1+images)
-        shutil.copy(data+labels+file+'.png', dir1+labels)
+        shutil.copy(data_images+file+'.bmp', dir1+images)
+        shutil.copy(data_labels+file+'.bmp', dir1+labels)
     for file in to_dir2:
         file = os.path.split(file)[1].split('.')[0]
         print 'Val:', file
-        shutil.copy(data+images+file+'.bmp', dir2+images)
-        shutil.copy(data+labels+file+'.png', dir2+labels)
+        shutil.copy(data_images+file+'.bmp', dir2+images)
+        shutil.copy(data_labels+file+'.bmp', dir2+labels)
     for file in to_dir3:
         file = os.path.split(file)[1].split('.')[0]
         print 'Test:', file
-        shutil.copy(data+images+file+'.bmp', dir3+images)
-        shutil.copy(data+labels+file+'.png', dir3+labels)
+        shutil.copy(data_images+file+'.bmp', dir3+images)
+        shutil.copy(data_labels+file+'.bmp', dir3+labels)

@@ -117,20 +117,20 @@ for filename in os.listdir(XML_PATH):
 			# 9 classes : Drivable
 			if class_val == 'asphalt':
 				draw.polygon(points, fill=ASPHALT)
-			elif class_val == 'gravel_h' or class_val == 'gravel_d':
-				draw.polygon(points, fill=GRAVEL_H)
-			elif class_val == 'gravel_l' or class_val == 'gravel':
-				draw.polygon(points, fill=GRAVEL_L)
-			elif class_val == 'mud':
-				draw.polygon(points, fill=MUD)
-			elif class_val == 'sand':
-				draw.polygon(points, fill=SAND)
-			elif class_val == 'water':
-				draw.polygon(points, fill=WATER)
-			elif class_val == 'grass':
-				draw.polygon(points, fill=GRASS)
-			elif class_val == 'snow':
-				draw.polygon(points, fill=SNOW)
+			# elif class_val == 'gravel_h' or class_val == 'gravel_d':
+			# 	draw.polygon(points, fill=GRAVEL_H)
+			# elif class_val == 'gravel_l' or class_val == 'gravel':
+			# 	draw.polygon(points, fill=GRAVEL_L)
+			# elif class_val == 'mud':
+			# 	draw.polygon(points, fill=MUD)
+			# elif class_val == 'sand':
+			# 	draw.polygon(points, fill=SAND)
+			# elif class_val == 'water':
+			# 	draw.polygon(points, fill=WATER)
+			# elif class_val == 'grass':
+			# 	draw.polygon(points, fill=GRASS)
+			# elif class_val == 'snow':
+			# 	draw.polygon(points, fill=SNOW)
 			else:
 				draw.polygon(points, fill=BACKGROUND)
 			'''
