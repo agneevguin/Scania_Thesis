@@ -1,0 +1,13 @@
+name: "Repeat"
+input: "data"
+input_shape { dim: 10 dim: 1 }
+layer {
+  name: "loss_repeat"
+  type: "Repeat"
+  bottom: "data"
+  top: "repeated"
+  propagate_down: 1
+  repeat_param {
+    num_repeats: 32
+  }
+}
