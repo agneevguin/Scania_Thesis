@@ -24,7 +24,8 @@ GRASS = (255,255,0)
 GRASS_N = (154,205,50)
 SNOW = (245,222,179)
 SNOW_N = (255,255,224)
-
+DRIVABLE = (0,255,0)
+NON_DRIVABLE = (255,0,0)
 
 im = Image.new('RGB', (256, 1))
 draw = ImageDraw.Draw(im)
@@ -38,22 +39,9 @@ def add_one():
 
 # 16_Classes
 im.putpixel((x,0), BACKGROUND[::-1])
-im.putpixel((add_one(),0), ASPHALT[::-1])
-im.putpixel((add_one(),0), GRAVEL_H[::-1])
-im.putpixel((add_one(),0), GRAVEL_L[::-1])
-im.putpixel((add_one(),0), GRAVEL_N[::-1])
-im.putpixel((add_one(),0), MUD[::-1])
-im.putpixel((add_one(),0), MUD_N[::-1])
-im.putpixel((add_one(),0), SAND[::-1])
-im.putpixel((add_one(),0), SAND_N[::-1])
-im.putpixel((add_one(),0), WATER[::-1])
-#im.putpixel((add_one(),0), WATER_N[::-1])
-im.putpixel((add_one(),0), SKY[::-1])
-im.putpixel((add_one(),0), VEGETATION[::-1])
-im.putpixel((add_one(),0), GRASS[::-1])
-im.putpixel((add_one(),0), GRASS_N[::-1])
-im.putpixel((add_one(),0), SNOW[::-1])
-im.putpixel((add_one(),0), SNOW_N[::-1])
+im.putpixel((add_one(),0), DRIVABLE[::-1])
+im.putpixel((add_one(),0), NON_DRIVABLE[::-1])
+
 '''
 
 # 9_Classes
@@ -69,7 +57,7 @@ im.putpixel((add_one(),0), SNOW[::-1])
 
 '''
 
-im.save('lut.png')
+im.save('lut_3.png')
 
 im = Image.open('lut.png', 'r')
 pix_val = list(im.getdata())

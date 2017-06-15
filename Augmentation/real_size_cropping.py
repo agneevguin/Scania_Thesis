@@ -26,8 +26,8 @@ if not os.path.isdir(OUT_LABEL_9_PATH):
 if not os.path.isdir(OUT_LABEL_16_PATH):
 	os.mkdir(OUT_LABEL_16_PATH)
 
-dx = dy = 256
-tilesPerImage = 3
+dx = dy = 512
+tilesPerImage = 2
 
 image_files = os.listdir(IMAGE_PATH) 
 label_9_files = os.listdir(LABEL_9_PATH) 
@@ -39,25 +39,24 @@ for file in image_files:
 	print file
 	with Image.open(os.path.join(IMAGE_PATH, file)) as im: 
 		for i in range(1, tilesPerImage+1): 
-			newname = file.replace('.', '_{:03d}.'.format(i)) 
+			newname = file.replace('.', '_P_{:03d}.'.format(i)) 
 			w, h = im.size												# 1280x1080
-			x = random.randint(w/8, (7*w/8)-dx-1) 						# width values
-			y = random.randint(h/2, h-dy-1)			 					# height values
-			z = random.randint(-10, 10)
+			x = random.randint(0, w-dx-1) 								# width values
+			y = random.randint(0, h-dy-1)			 					# height values
 			print("Cropping {}: {},{} -> {},{}".format(file, x,y, x+dx, y+dy))
-			im_2 = im.rotate(z, expand=True)
-			im_2 = im_2.crop((x,y, x+dx, y+dy))
+			im_2 = im.crop((x,y, x+dx, y+dy))
+			im_2 = im_2.resize((256,256), Image.NEAREST)
 			im_2.save(os.path.join(OUT_IMAGE_PATH, newname)) 
 			filename = (file.split('.')[0]+'.png')
 			if filename in label_9_files:
 				with Image.open(os.path.join(LABEL_9_PATH, filename)) as im_l9: 
-					im_l9 = im_l9.rotate(z, expand=True)
 					im_l9 = im_l9.crop((x,y, x+dx, y+dy))
+					im_l9 = im_l9.resize((256,256), Image.NEAREST)
 					im_l9.save(os.path.join(OUT_LABEL_9_PATH, newname)) 
 			if filename in label_16_files:
 				with Image.open(os.path.join(LABEL_16_PATH, filename)) as im_l16: 
-					im_l16 = im_l16.rotate(z, expand=True)
 					im_l16 = im_l16.crop((x,y, x+dx, y+dy))
+					im_l16 = im_l16.resize((256,256), Image.NEAREST)
 					im_l16.save(os.path.join(OUT_LABEL_16_PATH, newname)) 
 t = time.time()-t 
 print("Done {} images in {:.2f}s".format(numOfImages, t)) 

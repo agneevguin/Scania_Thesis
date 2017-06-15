@@ -12,25 +12,25 @@ import cv2
 import matplotlib.pyplot
 import pandas_ml.util.testing as tm
 
-path_pred = '/home/scania/Scania/Agneev/Results/1011-014-5-classes-original-images/'
+path_pred = '/home/scania/Scania/Agneev/Download_Models/Agneev_Model_9_6820_Preliminary-test_With-pretrain_epoch_30.0/Segnet_Labels/'
 
 pixels_pred_all = []
 pixels_true_all = []
-basewidth = 640
+basewidth = 256 # 640
 
 for filename_pred in os.listdir(path_pred):
-	if not (filename_pred.endswith('.png')): continue # or filename_pred.endswith('20170324_120648_1840.png')): continue # 20170324_120648_1239
 
-	path_true = '/home/scania/Scania/Agneev/Labels/Color_Labels/'
+	if not (filename_pred.endswith('.bmp')): continue # or filename_pred.endswith('20170324_120648_1840.png')): continue # 20170324_120648_1239
+	path_true = '/home/scania/Scania/Agneev/True_Labels/9-Classes_6820-Images/Test/Labels/'
 	for filename_true in os.listdir(path_true):
-		if not filename_true.endswith('20170324_115428_0635.png'): continue
+		#if not filename_true.endswith('20170324_115428_0635.png'): continue
 		if filename_true.split('.')[0] == filename_pred.split('.')[0]:
 			print filename_true.split('.')[0]
 
 			im_pred = Image.open(path_pred+filename_pred).convert('RGB')
 			im_true = Image.open(path_true+filename_true).convert('RGB')
 
-			
+			'''
 			# Resize images for smaller values
 			wpercent = (basewidth/float(im_pred.size[0]))
 			hsize = int((float(im_pred.size[1])*float(wpercent)))
@@ -40,7 +40,7 @@ for filename_pred in os.listdir(path_pred):
 			hsize = int((float(im_true.size[1])*float(wpercent)))
 			im_true = im_true.resize((basewidth,hsize), Image.NEAREST)
 			im_true = im_true
-
+			'''
 			pixels_pred_all += list(im_pred.getdata())
 			# pix_val_flat_pred = [x for sets in pix_val_pred for x in sets]
 
@@ -54,6 +54,7 @@ for filename_pred in os.listdir(path_pred):
 # pixels_pred_all = ['cat', 'cat', 'rabbit', 'dog', 'cat', 'rabbit', 'dog', 'cat', 'rabbit', 'cat', 'rabbit', 'rabbit']
 
 # Print the confusion matrix
+
 confusion_matrix = ConfusionMatrix(pixels_true_all, pixels_pred_all)
 print("\nConfusion matrix:\n%s" % confusion_matrix)
 confusion_matrix.plot()
