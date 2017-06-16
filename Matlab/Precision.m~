@@ -1,0 +1,4 @@
+load('C_3_682_With.mat')
+A = C_3_682_With;
+B = (A./sum(A))*100;
+C = diag(1./sum(A,2))*A
