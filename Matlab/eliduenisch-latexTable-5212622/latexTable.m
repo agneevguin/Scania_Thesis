@@ -221,7 +221,7 @@ for i=1:size(C,1)
     rowStr = '';
     for j=1:size(C,2)
         dataValue = C{i,j};
-        if iscell(dataValue)
+        if isstring(dataValue)
           dataValue = dataValue{:};
         elseif isnan(dataValue)
           dataValue = input.dataNanString;

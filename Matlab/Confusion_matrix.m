@@ -2,9 +2,9 @@
 % clear all; close all; clc;
 
 %% Input Data
-true_dir = '/home/scania/Scania/Agneev/True_Labels_blackened/3-Classes_9548-Images/Test/Labels/';
-true_dir = '/media/scania/iQMatic_2/Agneev_Digits/Datasets/3-Classes_1364-Images/Test/Labels/';
-pred_dir = '/home/scania/Scania/Agneev/Download_Models/Agneev_Model_3_1364_Preliminary-test_With-pretrain_epoch_30.0/Segnet_Labels/';
+true_dir = '/home/scania/Scania/Agneev/True_Labels_blackened/9-Classes_1364-Images/Test/Labels/';
+%true_dir = '/media/scania/iQMatic_2/Agneev_Digits/Datasets/9-Classes_1364-Images/Test/Labels/';
+pred_dir = '/home/scania/Scania/Agneev/Download_Models/Agneev_Model_9_1364_Preliminary-test_With-pretrain_Gabor_epoch_28.0/Segnet_Labels/';
 im_true_all = [];
 im_pred_all = [];
 
@@ -15,11 +15,11 @@ order_9 = ["105 105 105";"112 128 144";"192 192 192";"139 69 19";"244 164 96";"1
 order_16 = ["105 105 105";"112 128 144";"192 192 192";"139 69 19";"244 164 96";"106 90 205";"255 255 0";"245 222 179";"176 196 222";"210 105 30";"210 180 140";"135 206 235";"0 100 0";"154 205 50";"255 255 224";"0 0 0"];
 
 %% Read multiple files from folder
-f_true = dir(strcat(true_dir,'*.png'));         % true_dir
+f_true = dir(strcat(true_dir,'*.png'));         % true_dir bmp for 6820 and 9548
 for k = 1:size(f_true,1)
     file = strcat(true_dir,f_true(k).name);     % true_dir
     im_true{k} = imread(file);
-    im_true{k} = imresize(im_true{k}, 0.25, 'nearest');      % 0.25 for full images, 0.5 for 9548 images
+    im_true{k} = imresize(im_true{k}, 0.25, 'nearest');      % 0.25 for full images, 0.5 for 9548 images, none for 6820
     im_true_all = vertcat(im_true_all, im_true{k});
 end
 
@@ -37,5 +37,5 @@ RGB_true_Vector = reshape(im_true_all,[],3);
 RGB_pred_Vector = reshape(im_pred_all,[],3);
 RGB_true_Vector = join(string(RGB_true_Vector));
 RGB_pred_Vector = join(string(RGB_pred_Vector));
-[C_3_1364_With] = confusionmat(RGB_true_Vector,RGB_pred_Vector, 'order', order_3);
+[C_9_1364_Gabor] = confusionmat(RGB_true_Vector,RGB_pred_Vector, 'order', order_9);
 

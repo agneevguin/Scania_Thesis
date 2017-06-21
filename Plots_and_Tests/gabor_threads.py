@@ -40,7 +40,7 @@ def process(img, filters):
         np.maximum(accum, fimg, accum)
     return accum
 
-def process_threaded(img, filters, threadn = 8):
+def process_threaded(img, filters, threadn = 4):
     accum = np.zeros_like(img)
     def f(kern):
         return cv2.filter2D(img, cv2.CV_8UC3, kern)
@@ -82,10 +82,16 @@ if __name__ == '__main__':
     #cv2.waitKey()
     #cv2.destroyAllWindows()
 
-    path = '/home/scania/Scania/Agneev/Labels/Images/'
+
+    ### Left: 9,9548; 16,6820; 16,9548
+
+    path = '/media/scania/iQMatic_2/Agneev_Digits/Datasets/9-Classes_9548-Images/Train/Images/'
+    write_path = '/media/scania/iQMatic_2/Agneev_Digits/Datasets/9-Classes_9548-Images_Gabor/Train/Images/'
     for filename in os.listdir(path):
-        if not filename.endswith('.jpg'): continue
-        img = cv2.imread(path + filename)
-        filters = build_filters()
-        res2 = process_threaded(img, filters)
-        cv2.imwrite('/home/scania/Scania/Agneev/Results/Gabor-original-images/'+ filename.split('.')[0] +'.png',res2)
+        if os.path.isfile(write_path + filename) is False:
+            if not filename.endswith('.bmp'): continue
+            img = cv2.imread(path + filename)
+            filters = build_filters()
+            res2 = process_threaded(img, filters)
+            cv2.imwrite(write_path + filename.split('.')[0] +'.bmp',res2)
+            print(filename)
