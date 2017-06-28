@@ -32,7 +32,14 @@ def build_filters():
         kern /= 1.5*kern.sum()
         filters.append(kern)
     return filters
-
+# Parameters: 
+# ksize – Size of the filter returned.
+# sigma – Standard deviation of the gaussian envelope.
+# theta – Orientation of the normal to the parallel stripes of a Gabor function.
+# lambd – Wavelength of the sinusoidal factor.
+# gamma – Spatial aspect ratio.
+# psi – Phase offset.
+# ktype – Type of filter coefficients. It can be CV_32F or CV_64F .
 def process(img, filters):
     accum = np.zeros_like(img)
     for kern in filters:

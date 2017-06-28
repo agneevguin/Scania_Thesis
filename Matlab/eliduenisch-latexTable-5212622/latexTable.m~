@@ -221,30 +221,23 @@ for i=1:size(C,1)
     rowStr = '';
     for j=1:size(C,2)
         dataValue = C{i,j};
-        
+        num = str2double(dataValue);
+        if num ~isnan()
+            if num > 10 AND num < 20
+                tcolor = ''
+            
         if isstring(dataValue)
-            num = str2double(dataValue);
-            tcolor = '';
-            if  ~isnan(num)
-                if (num >= 10 && num<20) 
-                    tcolor = '\cellcolor{yellow!30}';
-                elseif num >= 20 
-                    tcolor = '\cellcolor{red!20}';
-                end
-            end
-            dataValue = dataValue{:};
+          dataValue = dataValue{:};
         elseif isnan(dataValue)
           dataValue = input.dataNanString;
         elseif isnumeric(dataValue)
           dataValue = num2str(dataValue,dataFormatArray{i,j});
         end
-        if i==j
-            tcolor='\cellcolor{green!20}';
-        end
+        
         if j==1
             rowStr = dataValue;
         else
-            rowStr = [rowStr,' & ',strcat(tcolor,dataValue)];
+            rowStr = [rowStr,' & ',dataValue];
         end
     end
     latex(end+1) = {[rowStr,' \\']};
