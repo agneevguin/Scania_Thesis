@@ -45,7 +45,8 @@ for class = 1:numOfClasses
     specificity(class) = TN(class) / (FP(class) + TN(class));
     precision(class) = TP(class) / (TP(class) + FP(class));
     f_score(class) = 2*TP(class)/(2*TP(class) + FP(class) + FN(class));
-    fpr(class) = 1 - 
+    fpr(class) = 1 - specificity(class);
+    iou(class) = TP(class) / ((TP(class) + FP(class) + FN(class)));
 end
 
 field2 = 'accuracy';  value2 = accuracy;
@@ -55,7 +56,14 @@ field5 = 'precision';  value5 = precision;
 field6 = 'recall';  value6 = sensitivity;
 field7 = 'Fscore';  value7 = f_score;
 field8 = 'FPR'; value8 = fpr;
-stats = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5,field6,value6,field7,value7,field8,value8);
+field9 = 'IoU'; value9 = iou;
+stats = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5,field6,value6,field7,value7,field8,value8,field9,value9);
 if exist('gorder','var')
-    stats = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5,field6,value6,field7,value7,field8,value8,'groupOrder',gorder);
+    stats = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5,field6,value6,field7,value7,field8,value8,field9,value9,'groupOrder',gorder);
 end
+
+%% Plot ROC
+% plot(value8, value3)
+% xlabel('False positive rate')
+% ylabel('True positive rate')
+% title('ROC for Classification')
