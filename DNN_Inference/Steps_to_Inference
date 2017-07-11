@@ -1,0 +1,7 @@
+1. Download model from Digits
+2. Extract: atool -x -e *.tar
+3. Inference
+cd ~/Scania/Agneev/Code/DNN_Inference
+python test_segnet_from_folder.py \
+
+4.
